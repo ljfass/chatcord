@@ -1,0 +1,31 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="email">username</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input  formControlName="username" type="text" >
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <button nz-button nzType="primary"  (click)="login()">登入</button>
+  </nz-form-item>
+</form>
+
+<form nz-form [formGroup]="chatForm" *ngIf="isLogined">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="content">conent</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input  formControlName="content" type="text" >
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <button nz-button nzType="primary"  (click)="send()">发送</button>
+  </nz-form-item>
+</form>
+
+<div>
+  <ul>
+    <li *ngFor="let content of contentList">
+      {{ content['username'] }}说了：{{ content['content'] }}
+    </li>
+  </ul>
+</div>
