@@ -1,0 +1,27 @@
+{
+    "name": "chatcord",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "dependencies": {
+        "express": "^4.17.1",
+        "nodemon": "^2.0.4",
+        "socket.io": "^2.3.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "node server",
+        "dev": "nodemon server"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ljfass/chatcord.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ljfass/chatcord/issues"
+    },
+    "homepage": "https://github.com/ljfass/chatcord#readme"
+}
