@@ -16,26 +16,28 @@
 		<header class="join-header">
 			<h1><i class="fas fa-smile"></i> ChatCord</h1>
 		</header>
+		<div>
+			<ul id="messages">
+
+			</ul>
+		</div>
 		<main class="join-main">
 			<form action="">
 				<div class="form-control">
 					<label for="username">Username</label>
 					<input type="text" name="username" id="username" placeholder="Enter username..." required />
 				</div>
-				<div class="form-control">
-					<label for="room">Room</label>
-					<select name="room" id="room">
-						<option value="JavaScript">JavaScript</option>
-						<option value="Python">Python</option>
-						<option value="PHP">PHP</option>
-						<option value="C#">C#</option>
-						<option value="Ruby">Ruby</option>
-						<option value="Java">Java</option>
-					</select>
-				</div>
+				<!-- <div class="form-control">
+					<label for="content">Content</label>
+					<input type="text" name="content" id="content" placeholder="Enter content..." required />
+				</div> -->
 				<button type="submit" class="btn">Join Chat</button>
 			</form>
-		</main>
+
+			<input type="text" name="content" id="content" placeholder="Enter content..." />
+	</div>
+	<button type="button" id="sendBtn" class="btn">send</button>
+	</main>
 	</div>
 
 	<script src="./js/socket.io/socket.io.js"></script>
