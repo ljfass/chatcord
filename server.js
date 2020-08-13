@@ -12,6 +12,13 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    socket.on('chat message', (msg) => {
+        console.log(`chat msg: ${msg}`);
+        io.emit('chat message', msg);
+    });
+    socket.on('disconnect', () => {
+        console.log('a user disconnected');
+    });
 });
 
 const PORT = 5000 || process.env.PORT;
