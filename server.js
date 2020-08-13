@@ -11,18 +11,22 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('conneced!!');
+
+    socket.emit('message', 'Welcome to the chat room'); // broadcast the user that is connecting 
+
     socket.on('send message', (msg) => {
-        console.log(msg);
         io.emit('send message', msg);
     });
 
+    socket.broadcast.emit('message', 'A user has joined the chat'); // broadcast to everyone excpet the one that is connecting
+
+
     socket.on('disconnect', () => {
-        console.log('disconneced!!');
+        io.emit('message', 'A user has left the chat'); // broadcast to everyone
     });
 });
 
-const PORT = 5000 || process.env.PORT;
+const PORT = 5001 || process.env.PORT;
 
 
 server.listen(PORT, () => {

@@ -35,7 +35,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.messageSubscription = this.service.messageList.subscribe((data: any) => {
-      console.log(data);
       this.contentList = data.map(item => item);
     })
     this.service.setupSocketConnection();
