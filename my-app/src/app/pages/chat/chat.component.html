@@ -1,12 +1,15 @@
-<form nz-form [formGroup]="validateForm">
+<form nz-form [formGroup]="validateForm" *ngIf="!isLogined">
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzFor="email">username</nz-form-label>
     <nz-form-control [nzSpan]="14">
-      <input nz-input  formControlName="username" type="text" >
+      <input nz-input formControlName="username" type="text">
     </nz-form-control>
-  </nz-form-item >
+  </nz-form-item>
   <nz-form-item>
-    <button nz-button nzType="primary"  (click)="login()">登入</button>
+    <nz-form-label [nzNoColon]="true" [nzSpan]="6"></nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <button nz-button nzType="primary" (click)="login()">登入</button>
+    </nz-form-control>
   </nz-form-item>
 </form>
 
@@ -14,11 +17,14 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzFor="content">conent</nz-form-label>
     <nz-form-control [nzSpan]="14">
-      <input nz-input  formControlName="content" type="text" >
+      <input nz-input formControlName="content" type="text">
     </nz-form-control>
-  </nz-form-item >
+  </nz-form-item>
   <nz-form-item>
-    <button nz-button nzType="primary"  (click)="send()">发送</button>
+    <nz-form-label [nzNoColon]="true" [nzSpan]="6"></nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <button nz-button nzType="primary" (click)="send()">发送</button>
+    </nz-form-control>
   </nz-form-item>
 </form>
 
