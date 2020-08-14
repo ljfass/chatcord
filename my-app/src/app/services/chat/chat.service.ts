@@ -31,19 +31,25 @@ export class ChatService {
       this.list.push(msg);
       this.messageList.next(this.list);
     });
+    this.socket.on('typing message', msg => {
+      console.log(msg);
+    });
     this.socket.on('message', msg => {
-
       this.notification
-      .blank(
-        'Notification Title',
-        msg
-      );
+        .blank(
+          'Notification Title',
+          msg
+        );
     });
 
   }
 
   sendMessage(username: string, content: string) {
-   this.socket.emit('send message', { username, content });
+    this.socket.emit('send message', { username, content });
+  }
+
+  typingBroadcast(username: string) {
+    this.socket.emit('typing message', username);
   }
 
 }

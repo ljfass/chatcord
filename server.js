@@ -18,6 +18,10 @@ io.on('connection', (socket) => {
         io.emit('send message', msg);
     });
 
+    socket.on('typing message', msg => {
+        socket.broadcast.emit('typing message', `${msg} is typing...`);
+    });
+
     socket.broadcast.emit('message', 'A user has joined the chat'); // broadcast to everyone excpet the one that is connecting
 
 
