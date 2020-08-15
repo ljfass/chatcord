@@ -1,8 +1,23 @@
+<header>
+  <nz-alert nzType="info" [nzMessage]="typingMessage"></nz-alert>
+</header>
+
 <form nz-form [formGroup]="validateForm" *ngIf="!isLogined">
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzFor="email">username</nz-form-label>
     <nz-form-control [nzSpan]="14">
       <input nz-input formControlName="username" type="text">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="room">room</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="room">
+        <nz-option nzValue="room1" nzLabel="room1"></nz-option>
+        <nz-option nzValue="room2" nzLabel="room2"></nz-option>
+        <nz-option nzValue="room3" nzLabel="room3"></nz-option>
+        <nz-option nzValue="room4" nzLabel="room4"></nz-option>
+      </nz-select>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -17,7 +32,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzFor="content">conent</nz-form-label>
     <nz-form-control [nzSpan]="14">
-      <input nz-input formControlName="content" type="text">
+      <input nz-input formControlName="content" type="text" (ngModelChange)="onSearch($event)">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -31,7 +46,10 @@
 <div>
   <ul>
     <li *ngFor="let content of contentList">
-      {{ content['username'] }}说了：{{ content['content'] }}
+      <div style="display: flex;">
+        <h4>{{ content['username'] }}</h4> - <h5>{{ content['time'] }}</h5>
+      </div>
+        {{ content['text'] }}
     </li>
   </ul>
 </div>

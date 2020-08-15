@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 export class ChatComponent implements OnInit {
 
   username = '';
+  room = '';
   validateForm: FormGroup;
   chatForm: FormGroup;
   isLogined = false;
@@ -20,13 +21,16 @@ export class ChatComponent implements OnInit {
     content: string
   }>[] = [];
   messageSubscription: Subscription;
+  typingNameSubsciption: Subscription;
+  typingMessage = '';
 
   constructor(
     private fb: FormBuilder,
     private service: ChatService
   ) {
     this.validateForm = this.fb.group({
-      username: [null]
+      username: [null],
+      room: [null]
     });
     this.chatForm = this.fb.group({
       content: [null]
@@ -38,15 +42,24 @@ export class ChatComponent implements OnInit {
       this.contentList = data.map(item => item);
     })
     this.service.setupSocketConnection();
+    this.service.typingPersonName.subscribe((value: string) => {
+      this.typingMessage = value;
+    })
   }
 
   login() {
     this.username = this.validateForm.value.username;
+    this.room = this.validateForm.value.room;
+    this.service.joinChat(this.username, this.room);
     this.isLogined = true;
   }
 
   send() {
-    this.service.sendMessage(this.username, this.chatForm.value.content);
+    this.service.sendMessage(this.chatForm.value.content);
+  }
+
+  onSearch(value) {
+    this.service.typingBroadcast(this.username);
   }
 
 }

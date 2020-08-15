@@ -16,10 +16,11 @@ export class ChatService {
   socket;
   list: Array<{
     username: string,
-    content: string
+    text: string,
+    time: string
   }>[] = [];
   messageList = new Subject();
-
+  typingPersonName = new Subject();
 
   constructor(
     private notification: NzNotificationService
@@ -32,20 +33,26 @@ export class ChatService {
       this.messageList.next(this.list);
     });
     this.socket.on('typing message', msg => {
-      console.log(msg);
+      this.typingPersonName.next(msg);
     });
     this.socket.on('message', msg => {
-      this.notification
-        .blank(
-          'Notification Title',
-          msg
-        );
+      this.list.push(msg);
+      this.messageList.next(this.list);
+    });
+    this.socket.on('roomInfos', msg => {
+      // this.list.push(msg);
+      // this.messageList.next(this.list);
     });
 
   }
 
-  sendMessage(username: string, content: string) {
-    this.socket.emit('send message', { username, content });
+  // 登入
+  joinChat(username, room) {
+    this.socket.emit('joinRoom', {username, room});
+  }
+
+  sendMessage(content: string) {
+    this.socket.emit('send message', content);
   }
 
   typingBroadcast(username: string) {
